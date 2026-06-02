@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento — Agência CRIA Natural</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f2ecdd;
+      color: #020202;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(2,2,2,0.10);
+    }
+    .header {
+      background: #799149;
+      color: #f2ecdd;
+      padding: 40px 48px;
+    }
+    .agency-name {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 10px;
+    }
+    .doc-title {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .doc-date {
+      font-size: 13px;
+      opacity: 0.65;
+      margin-top: 8px;
+    }
+    .section {
+      padding: 36px 48px;
+      border-bottom: 1px solid #f0ebe0;
+    }
+    .section:last-child { border-bottom: none; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #799149;
+      margin-bottom: 20px;
+    }
+    .client-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .client-field label {
+      font-size: 11px;
+      color: #999;
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .client-field span {
+      font-size: 15px;
+      font-weight: 500;
+      color: #020202;
+    }
+    .service-card {
+      background: #f2ecdd;
+      border-radius: 10px;
+      padding: 26px 30px;
+      margin-bottom: 16px;
+    }
+    .service-card:last-child { margin-bottom: 0; }
+    .service-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #020202;
+      margin-bottom: 16px;
+    }
+    .includes-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .includes-list li {
+      font-size: 14px;
+      color: #555;
+      padding: 5px 0 5px 20px;
+      position: relative;
+    }
+    .includes-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 13px;
+      width: 7px;
+      height: 7px;
+      background: #799149;
+      border-radius: 50%;
+    }
+    .service-price {
+      display: inline-block;
+      background: #799149;
+      color: #f2ecdd;
+      padding: 8px 22px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .cond-label {
+      font-size: 11px;
+      color: #999;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .cond-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: #020202;
+    }
+    .validity-badge {
+      display: inline-block;
+      border: 1.5px solid #799149;
+      color: #799149;
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 48px;
+      background: #f2ecdd;
+      border-top: 2px solid #e8e0cc;
+    }
+    .total-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+    }
+    .total-value {
+      font-size: 30px;
+      font-weight: 700;
+      color: #799149;
+    }
+    .footer {
+      background: #020202;
+      color: #f2ecdd;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-agency { font-size: 14px; font-weight: 600; }
+    .footer-note { font-size: 12px; opacity: 0.55; }
+
+    /* ── CARROSSEL DEMO ── */
+    .carousel-section {
+      padding: 36px 48px 40px;
+      border-top: 1px solid #f0ebe0;
+      background: #faf8f3;
+    }
+    .carousel-intro {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .carousel-intro strong { color: #020202; }
+
+    .ig-mockup {
+      max-width: 375px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(2,2,2,0.13);
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* IG Header */
+    .ig-header {
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      gap: 10px;
+      border-bottom: 1px solid #efefef;
+    }
+    .ig-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f97316, #1e3a5f);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .ig-username { font-size: 13px; font-weight: 600; color: #020202; }
+    .ig-location { font-size: 11px; color: #999; }
+    .ig-dots { margin-left: auto; font-size: 18px; color: #888; cursor: pointer; line-height: 1; }
+
+    /* Slides */
+    .slides-wrapper {
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      background: #f5f0e8;
+      aspect-ratio: 4 / 5;
+    }
+    .slides-wrapper:active { cursor: grabbing; }
+    .slides-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    /* Nav arrows */
+    .slide-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.85); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: #020202; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 10; transition: opacity 0.2s;
+    }
+    .slide-nav-btn:hover { background: #fff; }
+    .slide-nav-btn.prev { left: 10px; }
+    .slide-nav-btn.next { right: 10px; }
+    .slide-nav-btn.hidden { opacity: 0; pointer-events: none; }
+
+    /* Dots */
+    .slide-dots {
+      display: flex; justify-content: center; gap: 5px; padding: 10px 0 4px;
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #dbdbdb; transition: background 0.2s;
+    }
+    .dot.active { background: #3897f0; }
+
+    /* Slide counter */
+    .slide-counter {
+      position: absolute; top: 10px; right: 12px;
+      background: rgba(0,0,0,0.45);
+      color: #fff; font-size: 11px; font-weight: 600;
+      padding: 3px 9px; border-radius: 50px;
+      z-index: 10;
+    }
+
+    /* IG Footer */
+    .ig-actions {
+      display: flex; align-items: center; padding: 8px 14px 4px; gap: 14px;
+    }
+    .ig-icon { font-size: 22px; cursor: pointer; }
+    .ig-save { margin-left: auto; }
+    .ig-likes { padding: 0 14px; font-size: 13px; font-weight: 600; color: #020202; }
+    .ig-caption { padding: 2px 14px 8px; font-size: 13px; color: #020202; line-height: 1.4; }
+    .ig-caption strong { font-weight: 600; }
+    .ig-caption em { color: #3897f0; font-style: normal; }
+    .ig-more { color: #999; }
+    .ig-comments { padding: 0 14px 12px; font-size: 12px; color: #999; }
+    .ig-time { padding: 0 14px 14px; font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .carousel-hint {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 14px;
+    }
+
+    @media print {
+      body { padding: 0; background: white; }
+      .container { box-shadow: none; border-radius: 0; }
+    }
+    @media (max-width: 600px) {
+      .section, .header, .footer, .total-row { padding-left: 24px; padding-right: 24px; }
+      .client-grid, .conditions-grid { grid-template-columns: 1fr; }
+      .carousel-section { padding-left: 20px; padding-right: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div class="agency-name">Agência CRIA Natural</div>
+      <div class="doc-title">Proposta Comercial</div>
+      <div class="doc-date">Emitida em 02 de junho de 2026</div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Dados do Cliente</div>
+      <div class="client-grid">
+        <div class="client-field">
+          <label>Nome / Empresa</label>
+          <span>Orion Balanças</span>
+        </div>
+        <div class="client-field">
+          <label>Contato</label>
+          <span>(96) 99191-5066 · @orionbalancas_</span>
+        </div>
+        <div class="client-field">
+          <label>Ramo de Atuação</label>
+          <span>Venda e assistência técnica de balanças comerciais, sistemas de pesagem e cercas elétricas para contenção de gado — Macapá/AP</span>
+        </div>
+        <div class="client-field">
+          <label>Objetivo</label>
+          <span>Tornar-se referência no Amapá em balanças e cercas elétricas para contenção de gado</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Serviços Incluídos</div>
+
+      <div class="service-card">
+        <div class="service-name">Criação de Landing Page Institucional</div>
+        <ul class="includes-list">
+          <li>Briefing estratégico e levantamento de informações</li>
+          <li>Copywriting com foco em conversão para o mercado B2B local</li>
+          <li>Design responsivo para desktop e mobile</li>
+          <li>Desenvolvimento e publicação da página</li>
+          <li>Até 2 rodadas de revisão</li>
+        </ul>
+        <span class="service-price">R$ 1.800,00</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-name">Análise e Estrutura de Instagram</div>
+        <ul class="includes-list">
+          <li>Diagnóstico completo do perfil atual (@orionbalancas_)</li>
+          <li>Estratégia de posicionamento e identidade de marca</li>
+          <li>Reescrita da bio otimizada para conversão</li>
+          <li>Definição de paleta visual, estética e estilo de conteúdo</li>
+          <li>Guia de conteúdo com temas, formatos e frequência recomendada</li>
+          <li>Entrega de relatório completo em PDF</li>
+        </ul>
+        <span class="service-price">R$ 350,00</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-name">Pack de Posts Estratégicos — 8 posts/mês</div>
+        <ul class="includes-list">
+          <li>Planejamento editorial mensal personalizado (topo, meio e fundo de funil)</li>
+          <li>Criação das artes dos 8 posts mensais</li>
+          <li>Legendas estratégicas prontas para publicar</li>
+          <li>Calendário de publicação organizado</li>
+        </ul>
+        <span class="service-price">R$ 900,00/mês</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Condições da Proposta</div>
+      <div class="conditions-grid">
+        <div>
+          <div class="cond-label">Prazo de Entrega</div>
+          <div class="cond-value">15 dias corridos</div>
+        </div>
+        <div>
+          <div class="cond-label">Forma de Pagamento</div>
+          <div class="cond-value">Pix à vista · 50% entrada + 50% na entrega · Parcelado</div>
+        </div>
+        <div>
+          <div class="cond-label">Validade da Proposta</div>
+          <div class="cond-value">7 dias corridos</div>
+          <div class="validity-badge">válido até 09/06/2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="total-row">
+      <div class="total-label">Investimento Total</div>
+      <div class="total-value">R$ 3.050,00</div>
+    </div>
+
+    <!-- ── CARROSSEL DEMO ── -->
+    <div class="carousel-section">
+      <div class="section-label">Amostra de Conteúdo — Pack de Posts</div>
+      <p class="carousel-intro">
+        Veja abaixo um exemplo real de como seria um dos <strong>8 posts mensais</strong> entregues no Pack Estratégico.
+        Este carrossel foi criado com a identidade visual da Orion e a lógica de <strong>topo de funil</strong>
+        — conteúdo que atrai, educa e converte. <strong>Clique nas setas ou arraste para navegar.</strong>
+      </p>
+
+      <div class="ig-mockup">
+        <!-- Header -->
+        <div class="ig-header">
+          <div class="ig-avatar">O</div>
+          <div>
+            <div class="ig-username">orionbalancas_</div>
+            <div class="ig-location">Macapá, Amapá</div>
+          </div>
+          <div class="ig-dots">···</div>
+        </div>
+
+        <!-- Slides -->
+        <div class="slides-wrapper" id="sw">
+          <div class="slides-track" id="st">
+            <div class="slide"><img src="CArrossel de exemplo/1.png" alt="Slide 1" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/2.png" alt="Slide 2" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/3.png" alt="Slide 3" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/4.png" alt="Slide 4" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/5.png" alt="Slide 5" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/6.png" alt="Slide 6" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/7.png" alt="Slide 7" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/8.png" alt="Slide 8" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/9.png" alt="Slide 9" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/10.png" alt="Slide 10" draggable="false"></div>
+            <div class="slide"><img src="CArrossel de exemplo/11.png" alt="Slide 11" draggable="false"></div>
+          </div>
+
+          <!-- Counter -->
+          <div class="slide-counter" id="counter">1 / 11</div>
+
+          <!-- Arrows -->
+          <button class="slide-nav-btn prev hidden" id="prevBtn" onclick="moveSlide(-1)">‹</button>
+          <button class="slide-nav-btn next" id="nextBtn" onclick="moveSlide(1)">›</button>
+        </div>
+
+        <!-- Dots -->
+        <div class="slide-dots" id="dots">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
+        <!-- IG Actions -->
+        <div class="ig-actions">
+          <span class="ig-icon">🤍</span>
+          <span class="ig-icon">💬</span>
+          <span class="ig-icon">✈️</span>
+          <span class="ig-icon ig-save">🔖</span>
+        </div>
+        <div class="ig-likes">47 curtidas</div>
+        <div class="ig-caption">
+          <strong>orionbalancas_</strong> Deslize até o final e descubra por que confiança continua sendo o ativo mais valioso de qualquer empresa.<br><br>
+          <em>#OrionBalancas #ToledoBalancas #PesagemComercial #Curiosidades #HistoriaDaTecnologia #Balancas #AutomacaoComercial #Macapa #Amapa #Comercio #Empreendedorismo</em>
+        </div>
+        <div class="ig-comments">Ver todos os 5 comentários</div>
+        <div class="ig-time">Há 2 horas</div>
+      </div>
+
+      <p class="carousel-hint">← deslize os slides para navegar →</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-agency">Agência CRIA Natural</div>
+      <div class="footer-note">Proposta gerada em 02 de junho de 2026</div>
+    </div>
+  </div>
+
+  <script>
+    const track = document.getElementById('st');
+    const wrapper = document.getElementById('sw');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counter = document.getElementById('counter');
+    const dotsEl = document.getElementById('dots').querySelectorAll('.dot');
+    const total = 11;
+    let current = 0;
+
+    function goTo(idx) {
+      current = Math.max(0, Math.min(total - 1, idx));
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dotsEl.forEach((d, i) => d.classList.toggle('active', i === current));
+      prevBtn.classList.toggle('hidden', current === 0);
+      nextBtn.classList.toggle('hidden', current === total - 1);
+      counter.textContent = `${current + 1} / ${total}`;
+    }
+
+    function moveSlide(dir) { goTo(current + dir); }
+
+    // Touch / drag
+    let startX = 0, isDragging = false;
+    wrapper.addEventListener('pointerdown', e => { startX = e.clientX; isDragging = true; wrapper.setPointerCapture(e.pointerId); });
+    wrapper.addEventListener('pointermove', e => { if (!isDragging) return; });
+    wrapper.addEventListener('pointerup', e => {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 40) moveSlide(diff > 0 ? 1 : -1);
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') moveSlide(1);
+      if (e.key === 'ArrowLeft') moveSlide(-1);
+    });
+  </script>
+</body>
+</html>
