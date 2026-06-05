@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento — Agência CRIA Natural</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f2ecdd;
+      color: #020202;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(2,2,2,0.10);
+    }
+    .header {
+      background: #799149;
+      color: #f2ecdd;
+      padding: 40px 48px;
+    }
+    .agency-name {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase;
+      opacity: 0.85; margin-bottom: 10px;
+    }
+    .doc-title { font-size: 34px; font-weight: 700; letter-spacing: -0.5px; }
+    .doc-date { font-size: 13px; opacity: 0.65; margin-top: 8px; }
+
+    .section { padding: 36px 48px; border-bottom: 1px solid #f0ebe0; }
+    .section-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: #799149; margin-bottom: 20px;
+    }
+    .client-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .client-field label { font-size: 11px; color: #999; display: block; margin-bottom: 4px; font-weight: 500; }
+    .client-field span { font-size: 15px; font-weight: 500; color: #020202; }
+
+    .services-note {
+      background: #f2ecdd; border-left: 3px solid #799149;
+      border-radius: 8px; padding: 14px 18px; margin-bottom: 24px;
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
+    .services-note strong { color: #020202; }
+    .service-card { background: #f2ecdd; border-radius: 10px; padding: 26px 30px; margin-bottom: 16px; }
+    .service-card:last-child { margin-bottom: 0; }
+    .service-name { font-size: 18px; font-weight: 700; color: #020202; margin-bottom: 16px; }
+    .includes-list { list-style: none; margin-bottom: 20px; }
+    .includes-list li { font-size: 14px; color: #555; padding: 5px 0 5px 20px; position: relative; }
+    .includes-list li::before {
+      content: ''; position: absolute; left: 0; top: 13px;
+      width: 7px; height: 7px; background: #799149; border-radius: 50%;
+    }
+    .service-price {
+      display: inline-block; background: #799149; color: #f2ecdd;
+      padding: 8px 22px; border-radius: 50px; font-size: 18px; font-weight: 700;
+    }
+    .total-note {
+      font-size: 12px; color: #999; margin-top: 6px; display: block;
+    }
+
+    .conditions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .cond-label { font-size: 11px; color: #999; font-weight: 500; margin-bottom: 6px; }
+    .cond-value { font-size: 15px; font-weight: 600; color: #020202; }
+    .validity-badge {
+      display: inline-block; border: 1.5px solid #799149; color: #799149;
+      border-radius: 50px; padding: 4px 14px; font-size: 12px; font-weight: 600; margin-top: 8px;
+    }
+
+    .total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 28px 48px; background: #f2ecdd; border-top: 2px solid #e8e0cc;
+    }
+    .total-label { font-size: 14px; font-weight: 500; color: #666; }
+    .total-value { font-size: 30px; font-weight: 700; color: #799149; }
+
+    /* ── AMOSTRA ── */
+    .sample-section { padding: 36px 48px 40px; background: #faf8f3; }
+    .sample-intro { font-size: 13px; color: #666; line-height: 1.7; margin-bottom: 28px; }
+    .sample-intro strong { color: #020202; }
+    .sample-card {
+      background: #fff; border: 1.5px solid #e8e0cc; border-radius: 14px;
+      padding: 36px 28px; display: flex; flex-direction: column;
+      align-items: center; gap: 14px; text-align: center;
+    }
+    .sample-icon {
+      width: 60px; height: 60px; background: #f2ecdd; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 28px;
+    }
+    .sample-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #799149; }
+    .sample-title { font-size: 18px; font-weight: 700; color: #020202; line-height: 1.35; }
+    .sample-desc { font-size: 13px; color: #888; line-height: 1.65; max-width: 420px; }
+    .sample-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: #799149; color: #f2ecdd; text-decoration: none;
+      padding: 14px 30px; border-radius: 50px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.3px;
+      margin-top: 6px; transition: opacity 0.2s;
+    }
+    .sample-btn:hover { opacity: 0.88; }
+
+    .footer {
+      background: #020202; color: #f2ecdd;
+      padding: 24px 48px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-agency { font-size: 14px; font-weight: 600; }
+    .footer-note { font-size: 12px; opacity: 0.55; }
+
+    @media (max-width: 600px) {
+      .section, .header, .footer, .total-row, .sample-section { padding-left: 24px; padding-right: 24px; }
+      .client-grid, .conditions-grid { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { padding: 0; background: white; }
+      .container { box-shadow: none; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div class="agency-name">Agência CRIA Natural</div>
+      <div class="doc-title">Proposta Comercial</div>
+      <div class="doc-date">Emitida em 05 de junho de 2026</div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Dados do Cliente</div>
+      <div class="client-grid">
+        <div class="client-field">
+          <label>Nome / Empresa</label>
+          <span>Orion Balanças</span>
+        </div>
+        <div class="client-field">
+          <label>Contato</label>
+          <span>(96) 99191-5066 · @orionbalancas_</span>
+        </div>
+        <div class="client-field">
+          <label>Ramo de Atuação</label>
+          <span>Venda e assistência técnica de balanças comerciais, sistemas de pesagem e cercas elétricas para contenção de gado — Macapá/AP</span>
+        </div>
+        <div class="client-field">
+          <label>Objetivo</label>
+          <span>Tornar-se referência no Amapá em balanças e cercas elétricas para contenção de gado</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Serviços Incluídos</div>
+
+      <div class="services-note">
+        💡 <strong>Cada serviço pode ser contratado individualmente ou em conjunto.</strong>
+        Você escolhe o que faz mais sentido para o seu momento — e pode ampliar o pacote quando quiser.
+      </div>
+
+      <div class="service-card">
+        <div class="service-name">Criação de Landing Page Institucional</div>
+        <ul class="includes-list">
+          <li>Briefing estratégico e levantamento de informações</li>
+          <li>Copywriting com foco em conversão para o mercado B2B local</li>
+          <li>Design responsivo para desktop e mobile</li>
+          <li>Desenvolvimento e publicação da página</li>
+          <li>Até 2 rodadas de revisão</li>
+        </ul>
+        <span class="service-price">R$ 1.800,00</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-name">Análise e Estrutura de Instagram</div>
+        <ul class="includes-list">
+          <li>Diagnóstico completo do perfil atual (@orionbalancas_)</li>
+          <li>Estratégia de posicionamento e identidade de marca</li>
+          <li>Reescrita da bio otimizada para conversão</li>
+          <li>Definição de paleta visual, estética e estilo de conteúdo</li>
+          <li>Guia de conteúdo com temas, formatos e frequência recomendada</li>
+          <li>Entrega de relatório completo em PDF</li>
+        </ul>
+        <span class="service-price">R$ 350,00</span>
+      </div>
+
+      <div class="service-card">
+        <div class="service-name">Pack de Posts Estratégicos — 8 posts/mês</div>
+        <ul class="includes-list">
+          <li>Planejamento editorial mensal personalizado (topo, meio e fundo de funil)</li>
+          <li>Criação das artes dos 8 posts mensais</li>
+          <li>Legendas estratégicas prontas para publicar</li>
+          <li>Calendário de publicação organizado</li>
+        </ul>
+        <span class="service-price">R$ 900,00/mês</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Condições da Proposta</div>
+      <div class="conditions-grid">
+        <div>
+          <div class="cond-label">Prazo de Entrega</div>
+          <div class="cond-value">15 dias corridos</div>
+        </div>
+        <div>
+          <div class="cond-label">Forma de Pagamento</div>
+          <div class="cond-value">Pix à vista · 50% entrada + 50% na entrega · Parcelado</div>
+        </div>
+        <div>
+          <div class="cond-label">Validade da Proposta</div>
+          <div class="cond-value">7 dias corridos</div>
+          <div class="validity-badge">válido até 12/06/2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="total-row">
+      <div>
+        <div class="total-label">Investimento Total</div>
+        <span class="total-note">Contratando os 3 serviços juntos</span>
+      </div>
+      <div class="total-value">R$ 3.050,00</div>
+    </div>
+
+    <div class="sample-section">
+      <div class="section-label">Amostra de Conteúdo — Pack de Posts</div>
+      <p class="sample-intro">
+        Veja abaixo um exemplo real de como seria um dos <strong>8 posts mensais</strong> entregues no Pack Estratégico —
+        criado com a identidade visual da Orion, seguindo a lógica de <strong>topo de funil</strong>:
+        conteúdo que atrai, educa e converte.
+      </p>
+      <div class="sample-card">
+        <div class="sample-icon">🎠</div>
+        <div class="sample-label">Exemplo de Post — Carrossel</div>
+        <div class="sample-title">Essa balança mudou o comércio mundial...<br>e quase ninguém percebeu</div>
+        <div class="sample-desc">
+          Carrossel de 11 slides com storytelling histórico da Toledo — conteúdo de topo de funil
+          que gera curiosidade, autoridade e engajamento orgânico.
+        </div>
+        <a class="sample-btn" href="https://canva.link/u3aq7v0m69vy2l2" target="_blank">
+          ▶ &nbsp;Visualizar post de exemplo
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-agency">Agência CRIA Natural</div>
+      <div class="footer-note">Proposta gerada em 05 de junho de 2026</div>
+    </div>
+
+  </div>
+</body>
+</html>
